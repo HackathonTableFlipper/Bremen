@@ -1,4 +1,4 @@
-[home](/README)
+[home](/README.md)
 
 ------
 
