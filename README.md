@@ -18,7 +18,7 @@ NimmerLeererWasserspender
 
 Um die Wörter leichter zählen zu können wird dies in eine eigene Seite ausgelagert.
 
-[Kurzbeschreibung in 500 Wörtern](/../../tree/master/short_description)
+[Kurzbeschreibung in 500 Wörtern](/short_description)
 
 ## Wiki
 
