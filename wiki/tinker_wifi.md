@@ -12,5 +12,5 @@ Notwendig sind
 
 * Brick Daemon um über die API zu kommunizieren
 * Master Brick
-* ​
+* Master Brick Firmwareversion 2.4.0 or newer
 
