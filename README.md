@@ -24,4 +24,4 @@ Um die Wörter leichter zählen zu können wird dies in eine eigene Seite ausgel
 
 Informationen die gesammelt wurden zu verschiedenen Themen
 
-[TinkerForge WiFi Extension 2.0](/wiki/tinker_wifi)
+[TinkerForge WiFi Extension 2.0](/wiki/tinker_wifi.md)
