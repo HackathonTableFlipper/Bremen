@@ -3,11 +3,15 @@
 
 int main(void)
 {
+	struct sched_param param;
 	HX711 scale;
-	scale.begin(3, 2);
+
+	param.sched_priority = sched_get_priority_max(SCHED_FIFO);
+	sched_setscheduler(0, SCHED_FIFO, &param);
+	scale.begin(21, 22);
 	while(1)
 	{
-		//std::cout << scale.read() << std::endl;
+		printf("%ld\n", scale.read());
 	}
 	return 0;
 }

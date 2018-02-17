@@ -1,6 +1,5 @@
 #include "HX711.h"
-#include <iostream>
-#include <iomanip>
+//#include <ctime>
 
 #ifdef ARDUINO
 	#include <Arduino.h>
@@ -33,7 +32,6 @@ void HX711::begin(uint8_t dout, uint8_t pd_sck, uint8_t gain) {
 	DOUT = dout;
 
 	pinMode(PD_SCK, OUTPUT);
-	std::cout << std::dec << PD_SCK << std::endl;
 	pinMode(DOUT, INPUT);
 
 	set_gain(gain);
@@ -57,6 +55,7 @@ void HX711::set_gain(uint8_t gain) {
 	}
 
 	digitalWrite(PD_SCK, LOW);
+//	nanosleep((const struct timespec[]){{0, 1000}}, NULL);
 	read();
 }
 
@@ -78,8 +77,9 @@ int32_t  HX711::read() {
 
 	// set the channel and the gain factor for the next reading using the clock pin
 	for (uint8_t i = 0; i < GAIN; i++) {
+//		nanosleep(1);
 		digitalWrite(PD_SCK, HIGH);
-
+//		nanosleep(1);
 		digitalWrite(PD_SCK, LOW);
 	}
 
