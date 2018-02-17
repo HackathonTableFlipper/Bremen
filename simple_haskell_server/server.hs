@@ -65,10 +65,12 @@ handleGet mstate req@(request,_) =
     ".well-known/core" -> handleHelp req
     "help"             -> handleHelp req
     "serverAdress"     -> handleGetServerAdress mstate req
+    "weight"           -> handleWeight mstate req
     "isEmpty"          -> handleIsEmpty mstate req
     "gps"              -> handleGetGPS req
     "calibrated"       -> handleCalibrated mstate req
     _                  -> return $ Response Content [ContentFormat ApplicationJson] $ B.pack <$> Just ("{\"error\":\"Unknown path in GET: " ++ show (path request) ++ "\"}") 
+
 
 handlePost :: MState -> RequestHandler
 handlePost mstate req@(request,_) =
@@ -79,7 +81,7 @@ handlePost mstate req@(request,_) =
 
 
 handleHelp :: RequestHandler
-handleHelp = const $ return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"help\":\"GET serverAdress; GET isEmpty; GET gps; GET Calibrated; POST calibrate 'false'; POST calibrate 'true'; POST serverAdress 'new_ipv4_serveradress'\"}"))))
+handleHelp = const $ return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"help\":\"GET serverAdress; GET isEmpty; GET gps; GET calibrated; GET weight; POST calibrate 'false'; POST calibrate 'true'; POST serverAdress 'new_ipv4_serveradress'\"}"))))
 
 handleIsEmpty :: MState -> RequestHandler
 handleIsEmpty mstate = const $ do
@@ -87,10 +89,17 @@ handleIsEmpty mstate = const $ do
   (_,cali) <- readMVar mstate
   return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"isEmpty\":\"" ++ show (read emptyness < cali) ++ "\"}"))))
 
+handleWeight :: MState -> RequestHandler
+handleWeight mstate = const $ do
+  emptyness <- readFile "emptyness_file"
+  (_,cali) <- readMVar mstate
+  -- return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"weight\":\"" ++ show (read emptyness - cali) ++ "\"}"))))
+  return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"weight\":\"" ++ emptyness ++ "\"}"))))
+
 handleCalibrated :: MState -> RequestHandler
 handleCalibrated mstate = const $ do
   (_,cali) <- readMVar mstate
-  return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"isEmpty\":\"" ++ show cali ++ "\"}"))))
+  return (Response Content [ContentFormat ApplicationJson] (Just (B.pack ("{\"calibrated\":\"" ++ show cali ++ "\"}"))))
 
 handleGetServerAdress :: MState -> RequestHandler
 handleGetServerAdress mstate = const $ do
