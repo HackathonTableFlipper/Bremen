@@ -8,7 +8,7 @@ import Control.Concurrent
 import System.IO
 import Numeric.Limits
 import qualified Data.List as DL
-
+import qualified Data.Char as C
 -- withSocketsDo:: IO a -> IO a
 -- listenOn:: PortID -> IO Socket
 -- accept:: Socket -> IO (Handle, HostName, PortNumber)
@@ -30,12 +30,12 @@ notifierThread mstate = do
     if calEmpty st <= read emptyness then do
       notifieAllObs $ obs st
       notifierThread mstate
-    else
+    else do
       notifieAllObsDebug $ obs st
       notifierThread mstate
 
 notifieAllObs [] = return ()
-notifieAllObs (o:obs) = 
+notifieAllObs (o:obs) = do
   return $ jsonResponse "{\"observer\":\"empty State is critical\"}"
   return ()
 
@@ -106,23 +106,24 @@ handlePost mstate req@(request,_) =
 
 handleAddObserver :: MState -> RequestHandler
 handleAddObserver mstate req = do
-    st <- readMVar mstate
+{-    st <- readMVar mstate
     if elem req (obs st) then 
       return $ jsonResponse "{\"observer\":\"you are already observing\"}"
     else do
       let newSt = st{obs = req : obs st}
-      swapMVar mstate newSt
+      swapMVar mstate newSt -}
       return $ jsonResponse "{\"observer\":\"you are now observing\"}"
 
 
 handleDeleteObserver :: MState -> RequestHandler
 handleDeleteObserver mstate (_,endpoint) = do
-    st <- readMVar mstate
-    if DL.elem endpoint (map second (obs st)) then do
-      let Just i = DL.elemIndex endpoint (map second (obs st))
+{-    st <- readMVar mstate
+    if DL.elem endpoint (map snd (obs st)) then do
+      let Just i = DL.elemIndex endpoint (map snd (obs st))
       let newSt = st{obs = foldr (\(x,a) ss -> if x/=i then a:ss else ss) []  (DL.zip [0..](obs st))}
-      return $ jsonResponse "{\"observer\":\"you don't observe anymore\"}"
-    else return $ jsonResponse "{\"observer\":\"you weren't observing anyways\"}"
+      return $ jsonResponse "{\"observer\":\"you don't observe anymore\"}" 
+    else -}
+  return $ jsonResponse "{\"observer\":\"you weren't observing anyways\"}"
 
 
 handleHelp :: RequestHandler
@@ -140,7 +141,8 @@ handleIsEmpty :: MState -> RequestHandler
 handleIsEmpty mstate = const $ do
   emptyness <- readFile "emptyness_file"
   st <- readMVar mstate
-  return $ jsonResponse ("{\"isEmpty\":\"" ++ show (read emptyness < calEmpty st) ++ "\"}")
+  let weightProcent = 100 * ((read emptyness) - (calEmpty st))  / (calFull st - calEmpty st)
+  return $ jsonResponse ("{\"isEmpty\":\"" ++ map C.toLower (show (weightProcent < 33.4)) ++ "\"}")
 
 handleWeight :: MState -> RequestHandler
 handleWeight mstate = const $ do
