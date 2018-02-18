@@ -28,19 +28,20 @@ notifierThread mstate = do
     st <- readMVar mstate
     emptyness <- readFile "emptyness_file"
     if calEmpty st <= read emptyness then do
-        notifieAllObs $ obs st
-        notifierThread mstate
+      notifieAllObs $ obs st
+      notifierThread mstate
     else
-        notifierThread mstate
+      notifierThread mstate
 
 notifieAllObs [] = return ()
 notifieAllObs (o:obs) = do
+    putStrLn "im in notifieAll"
     let request = Request { requestMethod = GET
                         , requestOptions = []
                         , requestPayload = Nothing
                         , requestReliable = True }
     sock <- socket AF_INET Datagram defaultProtocol
-    bind sock o
+    bind sock o --coudn't bind sender endpoint of the observer request
     let transport = createUDPTransport sock
     client <- createClient transport
     let uriStr = URI.parseURI "/observe"
@@ -59,7 +60,7 @@ serverThread = withSocketsDo $ do
 --    bind sock (SockAddrInet6 5683 0 iN6ADDR_ANY 0)
     bind sock (SockAddrInet 5683 iNADDR_ANY)
     mstate <- newMVar  (ST initialServerAdress maxValue minValue []) 
-    forkIO $ notifierThread mstate
+--    forkIO $ notifierThread mstate
     server <- createServer (createUDPTransport sock) $ requestHandler mstate
     runServer server
 
