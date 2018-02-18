@@ -1,11 +1,10 @@
 <h1>Füllstandsmesser</h1>
 <table>
   <tr><th><b>Eigenschaft</b></th><th><b>Messwert<b></th></tr>
-  <tr><td>aktuelle Gewichtsmessung</td><td id="weight"><%=@currentLevel%></td></tr>
-	<tr><td>Spender leer?</td><td style="background-color: <%=@isEmpty?"red":"green"%>"><%=@isEmpty%></td></tr>
-  <tr><td>GPS</td><td><%=@gps%></td></tr>
+  <tr><td>aktuelle Gewichtsmessung</td><td id="weight"><%=@currentLevel.split(".")[0]%></td></tr>
+	<tr><td>Spender ist</td><td style="background-color: <%=@isEmpty?"red":"green"%>"><%=@isEmpty? "leer" : "voll"%></td></tr>
+  <tr><td>Standort</td><td><%=@gps%></td></tr>
   <tr><td>Kalibrierung</td><td><%=@calibrated%></td></tr>
-  <tr><td>Serveradresse</td><td><%=@serverAdress%></td></tr>
   <tr><td></td><td></td></tr>
 </table>
 

@@ -8,7 +8,7 @@ class StatusController < ApplicationController
 		@isEmpty = jsonFromCoap('/isEmpty')["isEmpty"] == "true"
 		@gps = jsonFromCoap('/gps')["getGPS"]
 		@calibrated = jsonFromCoap('/calibrated')["calibrated"]
-		@serverAdress = jsonFromCoap('/serverAdress')["getServerAdress"]
+		#@serverAdress = jsonFromCoap('/serverAdress')["getServerAdress"]
 		puts "\t\tHIER PASSIEREN DINGE"
 
 		callback = ->(socket, message) do
