@@ -10,10 +10,6 @@ Hier kommt die Beschreibung unserer Idee
 
 NimmerLeererWasserspender
 
-### Slogan
-
-*TODO*
-
 ### Kurzbeschreibung
 
 Um die Wörter leichter zählen zu können wird dies in eine eigene Seite ausgelagert.
@@ -25,3 +21,7 @@ Um die Wörter leichter zählen zu können wird dies in eine eigene Seite ausgel
 Informationen die gesammelt wurden zu verschiedenen Themen
 
 [TinkerForge WiFi Extension 2.0](/wiki/tinker_wifi.md)
+
+## Disclaimer
+
+Das Python script zum auslesen der Wägezelle stammt von: https://github.com/tatobari/hx711py
