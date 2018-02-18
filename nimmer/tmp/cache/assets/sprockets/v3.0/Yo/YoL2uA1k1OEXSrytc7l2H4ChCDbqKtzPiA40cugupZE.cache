@@ -1,0 +1,9 @@
+I"Â(function() {
+  App.fluid = App.cable.subscriptions.create("FluidChannel", {
+    connected: function() {},
+    disconnected: function() {},
+    received: function(data) {}
+  });
+
+}).call(this);
+:ET
