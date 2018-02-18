@@ -16,7 +16,7 @@ import qualified Data.List as DL
 
 type CalibratedValue = Double
 type ServerAdress = Endpoint
-type Observers = [Endpoint]
+type Observers = [(Request,Endpoint)]
 data State = ST { adr::ServerAdress, calEmpty::CalibratedValue, calFull::CalibratedValue, obs::Observers}
 type MState = MVar State
 
@@ -31,27 +31,19 @@ notifierThread mstate = do
       notifieAllObs $ obs st
       notifierThread mstate
     else
+      notifieAllObsDebug $ obs st
       notifierThread mstate
 
 notifieAllObs [] = return ()
-notifieAllObs (o:obs) = do
-    putStrLn "im in notifieAll"
-    let request = Request { requestMethod = GET
-                        , requestOptions = []
-                        , requestPayload = Nothing
-                        , requestReliable = True }
-    sock <- socket AF_INET Datagram defaultProtocol
-    bind sock o --coudn't bind sender endpoint of the observer request
-    let transport = createUDPTransport sock
-    client <- createClient transport
-    let uriStr = URI.parseURI "/observe"
-    case uriStr of
-        Nothing -> return ()
-        Just uri -> do 
-            doRequest client uri request
-            return ()
+notifieAllObs (o:obs) = 
+  return $ jsonResponse "{\"observer\":\"empty State is critical\"}"
+  return ()
 
 
+notifieAllObsDebug [] = return ()
+notifieAllObsDebug (o:obs) = do
+  return $ jsonResponse "{\"observer\":\"observer Debug Reponse!\"}"
+  return ()
 
 
 serverThread = withSocketsDo $ do
@@ -113,12 +105,12 @@ handlePost mstate req@(request,_) =
 
 
 handleAddObserver :: MState -> RequestHandler
-handleAddObserver mstate (_,endpoint) = do
+handleAddObserver mstate req = do
     st <- readMVar mstate
-    if elem endpoint (obs st) then 
+    if elem req (obs st) then 
       return $ jsonResponse "{\"observer\":\"you are already observing\"}"
     else do
-      let newSt = st{obs = endpoint : obs st}
+      let newSt = st{obs = req : obs st}
       swapMVar mstate newSt
       return $ jsonResponse "{\"observer\":\"you are now observing\"}"
 
@@ -126,8 +118,9 @@ handleAddObserver mstate (_,endpoint) = do
 handleDeleteObserver :: MState -> RequestHandler
 handleDeleteObserver mstate (_,endpoint) = do
     st <- readMVar mstate
-    if elem endpoint (obs st) then do
-      let newSt = st{obs = DL.delete endpoint (obs st)}
+    if DL.elem endpoint (map second (obs st)) then do
+      let Just i = DL.elemIndex endpoint (map second (obs st))
+      let newSt = st{obs = foldr (\(x,a) ss -> if x/=i then a:ss else ss) []  (DL.zip [0..](obs st))}
       return $ jsonResponse "{\"observer\":\"you don't observe anymore\"}"
     else return $ jsonResponse "{\"observer\":\"you weren't observing anyways\"}"
 
