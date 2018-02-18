@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>280</x>
+      <y>80</y>
+      <w>330</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Raspberry Pi
+fontsize=18
+bg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>310</x>
+      <y>350</y>
+      <w>270</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+CoAP - Server [Haskell]
+bg=white
+layer=1
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>10</x>
+      <y>160</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Wägezelle
+bg=white
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>310</x>
+      <y>230</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+SensorInterface [Python]
+bg=white
+layer=1
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>240</y>
+      <w>70</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-(</panel_attributes>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>250</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=()-[&gt;]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>310</x>
+      <y>130</y>
+      <w>270</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Socket - Client [Java]
+bg=white
+layer=1
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>170</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=[^]-[^]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>280</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=[v]-[v]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>670</x>
+      <y>450</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Web - Server [Ruby]
+bg=white
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>690</x>
+      <y>120</y>
+      <w>230</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Socket - Server [Java]
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>670</x>
+      <y>340</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+CoAp - Client [Ruby]
+bg=white
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>690</x>
+      <y>220</y>
+      <w>230</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Android - App [Java]
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>140</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=[=]-[=]
+layer=2</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>170</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=[=]-[=]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>360</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=[=]-[=]
+layer=2</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>390</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=[=]-[=]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>630</x>
+      <y>300</y>
+      <w>320</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Webserver
+fontsize=18
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>0</x>
+      <y>110</y>
+      <w>230</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Wasserspender
+fontsize=18
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>10</x>
+      <y>240</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Digital Wandler
+bg=white
+layer=1
+fontsize=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>200</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=[v]-[v]
+layer=2</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+</diagram>
